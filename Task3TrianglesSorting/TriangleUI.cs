@@ -1,35 +1,51 @@
 using System;
+using System.Collections.Generic;
 
 namespace Task3TrianglesSorting
 {
     public class TriangleUI
     {
+        private const byte ArgsCount = 4;
         public Triangle ReadTriangle()
         {
-            string[] inputData = new string [4];
+            Console.WriteLine("Enter sides and name pls");
+            var inputData = Console.ReadLine()?.Split(',');
 
-            double sideA;
-            double sideB;
-            double sideC;
-            string nameTriangle;
-            try
+            if (inputData != null && inputData.Length == ArgsCount)
             {
-                sideA = double.Parse(inputData[0]);
-                sideB = double.Parse(inputData[1]);
-                sideC = double.Parse(inputData[2]);
-                nameTriangle = inputData[3];
+                var sideA = double.Parse(inputData[0]);
+                var sideB = double.Parse(inputData[1]);
+                var sideC = double.Parse(inputData[2]);
+                var nameTriangle = inputData[3];
 
-                return new Triangle(sideA,sideB,sideC,nameTriangle);
+                return new Triangle(sideA, sideB, sideC, nameTriangle);
             }
-            catch (NullReferenceException)
+            throw new Exception();
+        }
+
+        public void ShowListOfTriangles(List<AbstractFigure> triangles)
+        {
+            var index = 1;
+            Console.WriteLine("============= Triangles list: ===============");
+            foreach (var triangle in triangles)
             {
-                Console.WriteLine("Empty");
+                Console.WriteLine("{0}.{1}",index++,triangle);
             }
-            catch (IndexOutOfRangeException)
-            {
-                Console.WriteLine("Must enter more inf");
-            }
-            return ReadTriangle();
+        }
+
+        public void PrintMistake()
+        {
+            Console.WriteLine("You entered incorrect data");
+        }
+        
+        
+        public static bool AddFigure()
+        {
+            Console.WriteLine("Do you want add figure?");
+            var result = Console.ReadLine()?.ToLower();
+            var add = false || (result == "y" || result == "yes");
+
+            return add;
         }
     }
 }

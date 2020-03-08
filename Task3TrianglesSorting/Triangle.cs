@@ -7,40 +7,43 @@ namespace Task3TrianglesSorting
     {
         public Triangle(double sideA,double sideB,double sideC,string name):base(name)
         {
-            this.sideA = sideA;
-            this.sideB = sideB;
-            this.sideC = sideC;
-            
+            _sideA = sideA;
+            _sideB = sideB;
+            _sideC = sideC;
+            Perimeter = CalculatePerimeter();
+            Area = CalculateArea();
+        }
+        public sealed override double CalculatePerimeter()
+        {
+            return _sideA + _sideB + _sideC;
         }
 
-        public Triangle CreateTriangle(double sideA, double sideB, double sideC, string name = "")
+        public sealed override double CalculateArea()
         {
-            if ((sideA + sideB) > sideC && (sideA + sideC) > sideB && (sideB + sideC) > sideA)
-            {
-                return new Triangle(sideA, sideB, sideC, name);
-            }
-            else
-            {
-                throw new ArgumentException();
-            }
-        }
-
-        public override double CalculatePerimeter()
-        {
-            return sideA + sideB + sideC;
-        }
-
-        public override double CalculateArea()
-        {
-            double area;
-            double halfPerimeter = Perimeter / 2;
-            area = Math.Sqrt(halfPerimeter * (halfPerimeter - sideA) * (halfPerimeter - sideB) *
-                             (halfPerimeter - sideC));
+            var halfPerimeter = Perimeter / 2;
+            var area = Math.Sqrt(halfPerimeter * (halfPerimeter - _sideA) * 
+                                 (halfPerimeter - _sideB) * (halfPerimeter - _sideC));
 
             return area;
         }
-        private double sideA;
-        private double sideB;
-        private double sideC;
+
+        public bool IsValid(Triangle triangle)
+        {
+            if (triangle._sideA <= 0 || triangle._sideB <= 0 || triangle._sideC <= 0 ||
+                triangle._sideA + triangle._sideB < triangle._sideC ||
+                triangle._sideA + triangle._sideC < triangle._sideB ||
+                triangle._sideC + triangle._sideB < triangle._sideA)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override string ToString() => $"[Triangle {Name}]: {Area:F2} cm";
+        
+        private readonly double _sideA;
+        private readonly double _sideB;
+        private readonly double _sideC;
     }
 }

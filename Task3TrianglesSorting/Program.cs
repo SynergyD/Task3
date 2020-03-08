@@ -7,19 +7,23 @@ namespace Task3TrianglesSorting
     {
         public static void Main(string[] args)
         {
-            AbstractFigure figure = new Triangle(5,4,3,"Name");
-            Console.WriteLine(figure.Area);
-            Console.WriteLine(figure.Perimeter);
-            //Console.ReadLine();
+            TriangleUI _ui = new TriangleUI();
+            List<AbstractFigure> Triangles = new List<AbstractFigure>();
             
+            while(TriangleUI.AddFigure())
+            {
+                Triangle triangle = _ui.ReadTriangle();
+                if (triangle.IsValid(triangle))
+                {
+                    Triangles.Add(triangle);
+                    Triangles.Sort();
+                    _ui.ShowListOfTriangles(Triangles);
+                }
+                else
+                {
+                    _ui.PrintMistake();
+                }
+            }
         }
-
-        public void AddNewTriangleToList(SortedSet<Triangle> triangles)
-        {
-            
-        }
-        
-        
-        
     }
 }

@@ -4,21 +4,14 @@ namespace Task3TrianglesSorting
 {
     public abstract class AbstractFigure: IComparable<AbstractFigure>
     {
-        public AbstractFigure(string name)
+        protected AbstractFigure(string name)
         {
             Name = name;
-            Perimeter = CalculatePerimeter();
-            Area = CalculateArea();
         }
 
-        public AbstractFigure()
-        {
-            
-        }
-
-        public double Perimeter { get; private set; }
-        public double Area { get; private set; }
-        private string Name { get; set; }
+        protected double Perimeter { get; set; }
+        protected double Area { get; set; }
+        protected string Name { get; }
 
         public abstract double CalculatePerimeter();
         public abstract double CalculateArea();
@@ -34,10 +27,8 @@ namespace Task3TrianglesSorting
             {
                 return -1;
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
     }
 }
