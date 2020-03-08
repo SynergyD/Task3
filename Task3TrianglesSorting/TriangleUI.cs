@@ -20,7 +20,8 @@ namespace Task3TrianglesSorting
 
                 return new Triangle(sideA, sideB, sideC, nameTriangle);
             }
-            throw new Exception();
+            
+            return ReadTriangle();
         }
 
         public void ShowListOfTriangles(List<AbstractFigure> triangles)
