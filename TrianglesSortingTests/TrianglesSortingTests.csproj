@@ -4,11 +4,12 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{58B22D6E-2895-421F-937A-F94910E218F5}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <ProjectGuid>{8A9FBFF7-8E9B-4835-BC36-9E7DC3C0D200}</ProjectGuid>
+        <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+        <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Task3TrianglesSorting</RootNamespace>
-        <AssemblyName>Task3TrianglesSorting</AssemblyName>
+        <RootNamespace>TrianglesSortingTests</RootNamespace>
+        <AssemblyName>TrianglesSortingTests</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
@@ -21,7 +22,6 @@
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
-        <Prefer32bit>false</Prefer32bit>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,33 +33,34 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
-        <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
-          <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="mscorlib" />
         <Reference Include="System" />
-        <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-          <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-          <Private>True</Private>
-        </Reference>
-        <Reference Include="System.ComponentModel.DataAnnotations" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Xml" />
+        <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
+            <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+        </Reference>
+        <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
+            <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
+        </Reference>
+        <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
+            <HintPath>..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+        </Reference>
+        <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
+            <HintPath>..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Application\TrianglesSortingApp.cs" />
-        <Compile Include="Models\LogHelper.cs" />
-        <Compile Include="Models\Shape.cs" />
-        <Compile Include="Models\Triangle.cs" />
-        <Compile Include="Program.cs" />
+        <Compile Include="ShapeTests.cs" />
+        <Compile Include="TrianglesSortingAppTests.cs" />
+        <Compile Include="TriangleTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="UI\TriangleUI.cs" />
     </ItemGroup>
     <ItemGroup>
-      <None Include="Configs\log4net.config" />
-      <None Include="Configs\packages.config" />
+      <ProjectReference Include="..\Task3TrianglesSorting\Task3TrianglesSorting.csproj">
+        <Project>{58b22d6e-2895-421f-937a-f94910e218f5}</Project>
+        <Name>Task3TrianglesSorting</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -69,5 +70,4 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-
 </Project>

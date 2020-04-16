@@ -1,28 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Task3TrianglesSorting
 {
     internal class Program
     {
+        private static readonly log4net.ILog log = LogHelper.GetLogger();
+        
         public static void Main(string[] args)
         {
-            TriangleUI _ui = new TriangleUI();
-            List<AbstractFigure> Triangles = new List<AbstractFigure>();
+            var ui = new TriangleUI();
+            var app = new TrianglesSortingApp(ui);
             
-            while(TriangleUI.AddFigure())
+            try
             {
-                Triangle triangle = _ui.ReadTriangle();
-                if (triangle.IsValid(triangle))
-                {
-                    Triangles.Add(triangle);
-                    Triangles.Sort();
-                    _ui.ShowListOfTriangles(Triangles);
-                }
-                else
-                {
-                    _ui.PrintMistake();
-                }
+                app.Run(args[1], args[2], args[3], args[0]);
+            }
+            catch (IndexOutOfRangeException exception)
+            {
+                ui.DisplayResult(TriangleUI.Instruction);
+                log.Error(exception);
+            }
+            catch (FormatException exception)
+            {
+                ui.DisplayResult(TriangleUI.Mistake);
+                ui.DisplayResult(TriangleUI.Instruction);
+                log.Error(exception);
+            }
+            catch (ArgumentException exception)
+            {
+                ui.DisplayResult(TriangleUI.Mistake);
+                ui.DisplayResult(TriangleUI.Instruction);
+                log.Error(exception);
             }
         }
     }
